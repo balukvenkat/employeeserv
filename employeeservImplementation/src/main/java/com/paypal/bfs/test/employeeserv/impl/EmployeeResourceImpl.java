@@ -63,7 +63,7 @@ public class EmployeeResourceImpl implements EmployeeResource {
         Optional<List<Errors>> error = inputValidator.getErrors(employeeRequest);
         if(error.isPresent()){
             return ResponseEntity
-                    .status(HttpStatus.FORBIDDEN)
+                    .status(HttpStatus.BAD_REQUEST)
                     .body(error);
         }
 

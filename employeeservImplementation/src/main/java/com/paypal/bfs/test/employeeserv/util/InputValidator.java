@@ -21,20 +21,15 @@ public class InputValidator {
     private static final String STATE = "state";
     private static final String ZIP_CODE = "zip code";
     private static final String COUNTRY = "country";
-
+    private static final int MAX_LENGTH = 255;
     private static final String REQUIRED = "This is required";
 
     public Optional<List<Errors>> getErrors(Employee employeeRequest) {
         List<Errors> errorsList = new ArrayList<>();
 
-
-
         checkForRequired(employeeRequest, errorsList);
-
-
-
         //max length
-
+        checkForLength(employeeRequest, errorsList);
         //Date format
 
         if(errorsList.size()>0){
@@ -42,6 +37,20 @@ public class InputValidator {
         }
 
         return Optional.empty();
+    }
+
+    private void checkForLength(Employee employeeRequest, List<Errors> errorsList) {
+        if(isMaxLength(employeeRequest.getFirstName(),MAX_LENGTH)){
+            errorsList.add(Errors.builder().field(FIRST_NAME).message("Max length is "+MAX_LENGTH).build());
+        }
+
+        if(isMaxLength(employeeRequest.getZipCode(),10)){
+            errorsList.add(Errors.builder().field(ZIP_CODE).message("Max length is "+10).build());
+        }
+    }
+
+    private boolean isMaxLength(String value,int maxLength) {
+        return value.length() > maxLength;
     }
 
     private void checkForRequired(Employee employeeRequest, List<Errors> errorsList) {
