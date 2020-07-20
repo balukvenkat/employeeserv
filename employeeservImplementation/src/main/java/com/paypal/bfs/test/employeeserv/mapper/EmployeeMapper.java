@@ -5,6 +5,8 @@ import com.paypal.bfs.test.employeeserv.api.model.Employee;
 import com.paypal.bfs.test.employeeserv.model.EmployeeTable;
 import org.springframework.stereotype.Component;
 
+import java.util.Optional;
+
 @Component
 public class EmployeeMapper {
 
@@ -35,6 +37,7 @@ public class EmployeeMapper {
         employee.setZipCode(employeeTable.getZip_code());
         employee.setCountry(employeeTable.getCountry());
         return employee;
+
     }
 
 }

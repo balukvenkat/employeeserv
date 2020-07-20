@@ -23,7 +23,7 @@
       "description": "date of birth",
       "type": "string",
       "minLength": 1,
-      "maxLength": 100
+      "maxLength": 255
     },
     "address_line1": {
       "description": "address line 1",
@@ -33,25 +33,27 @@
     },
     "address_line2": {
       "description": "address line 2",
-      "type": "string"
+      "type": "string",
+      "minLength": 0,
+      "maxLength": 255
     },
     "city": {
       "description": "city",
       "type": "string",
       "minLength": 1,
-      "maxLength": 25
+      "maxLength": 255
     },
     "state": {
       "description": "state",
       "type": "string",
       "minLength": 1,
-      "maxLength": 25
+      "maxLength": 255
     },
     "country": {
       "description": "country",
       "type": "string",
       "minLength": 1,
-      "maxLength": 25
+      "maxLength": 255
     },
     "zip_code": {
       "description": "zip code",

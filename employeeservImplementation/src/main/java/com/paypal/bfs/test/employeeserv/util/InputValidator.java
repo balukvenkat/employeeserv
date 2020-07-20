@@ -28,29 +28,39 @@ public class InputValidator {
         List<Errors> errorsList = new ArrayList<>();
 
         checkForRequired(employeeRequest, errorsList);
-        //max length
+
         checkForLength(employeeRequest, errorsList);
-        //Date format
 
-        if(errorsList.size()>0){
-            return Optional.of(errorsList);
-        }
+        return errorsList.size() > 0 ? Optional.of(errorsList) : Optional.empty();
 
-        return Optional.empty();
     }
 
     private void checkForLength(Employee employeeRequest, List<Errors> errorsList) {
         if(isMaxLength(employeeRequest.getFirstName(),MAX_LENGTH)){
             errorsList.add(Errors.builder().field(FIRST_NAME).message("Max length is "+MAX_LENGTH).build());
         }
-
+        if(isMaxLength(employeeRequest.getLastName(),MAX_LENGTH)){
+            errorsList.add(Errors.builder().field(LAST_NAME).message("Max length is "+MAX_LENGTH).build());
+        }
+        if(isMaxLength(employeeRequest.getAddressLine1(),MAX_LENGTH)){
+            errorsList.add(Errors.builder().field(ADDRESS_LINE_1).message("Max length is "+MAX_LENGTH).build());
+        }
+        if(isMaxLength(employeeRequest.getAddressLine2(),MAX_LENGTH)){
+            errorsList.add(Errors.builder().field("Address Line 2").message("Max length is "+MAX_LENGTH).build());
+        }
+        if(isMaxLength(employeeRequest.getCountry(),MAX_LENGTH)){
+            errorsList.add(Errors.builder().field(COUNTRY).message("Max length is "+MAX_LENGTH).build());
+        }
+        if(isMaxLength(employeeRequest.getState(),MAX_LENGTH)){
+            errorsList.add(Errors.builder().field(STATE).message("Max length is "+MAX_LENGTH).build());
+        }
         if(isMaxLength(employeeRequest.getZipCode(),10)){
             errorsList.add(Errors.builder().field(ZIP_CODE).message("Max length is "+10).build());
         }
     }
 
     private boolean isMaxLength(String value,int maxLength) {
-        return value.length() > maxLength;
+        return !isEmpty(value) && value.length() > maxLength;
     }
 
     private void checkForRequired(Employee employeeRequest, List<Errors> errorsList) {
